@@ -19,5 +19,5 @@ def personView(request):
     if request.method == 'GET':
         person = Person.objects.all()
         serializer = PersonSerializer(person, many=True)
-        return Response(serializer.data)
+
     
