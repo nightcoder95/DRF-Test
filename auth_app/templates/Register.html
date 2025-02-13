@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Register</title>
+  </head>
+  <body>
+    <h1>Register</h1>
+    <form id="register-form">
+      <label>Username:</label>
+      <input type="text" id="username" name="username" required /><br />
+      <label>Email:</label>
+      <input type="email" id="email" name="email" required /><br />
+      <label>Password:</label>
+      <input type="password" id="password" name="password" required /><br />
+      <button type="submit">Register</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+      // When the form is submitted, use JavaScript to send a POST request to your API
+      document
+        .getElementById("register-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault(); // Prevent the default form submission
+          const data = {
+            username: document.getElementById("username").value,
+            email: document.getElementById("email").value,
+            password: document.getElementById("password").value,
+          };
+
+          fetch("api/register/", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              document.getElementById("result").innerText =
+                "Registration successful!";
+            })
+            .catch((error) => {
+              document.getElementById("result").innerText = "Error: " + error;
+            });
+        });
+    </script>
+  </body>
+</html>
